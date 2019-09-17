@@ -1,4 +1,4 @@
-const telegramBot = require('node-telegram-bot-api');
+const telegrambot = require('node-telegram-bot-api');
 
 const bot = new telegramBot(process.env.BOT_TOKEN); // Get the token from the environment variable
 const URL = process.env.URL; // get the Heroku config var URL
@@ -10,9 +10,9 @@ bot.telegrambot.setWebhook(`${URL}bot${BOT_TOKEN}`);
 bot.startWebhook(`/bot${BOT_TOKEN}`, null, PORT);
 
 
-const token ='980805135:AAEWOjsDBR7BX8S99TNnAHg34z9YThCarNY';
+/*const token ='980805135:AAEWOjsDBR7BX8S99TNnAHg34z9YThCarNY';
 const api = new telegramBot(token, {webhook: true});
-const options = {webhook: true};
+const options = {webhook: true};*/
 
 /*const telegramBot1 = require('node-telegram-bot-api');
 const bot = new telegramBot1('980805135:AAEWOjsDBR7BX8S99TNnAHg34z9YThCarNY');*/
