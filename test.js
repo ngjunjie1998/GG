@@ -1,19 +1,27 @@
+const telegramBot = require('node-telegram-bot-api');
+
+const bot = new telegramBot(process.env.BOT_TOKEN); // Get the token from the environment variable
+const URL = process.env.URL; // get the Heroku config var URL
+const BOT_TOKEN = process.env.BOT_TOKEN || ""; // get Heroku config var BOT_TOKEN
+const PORT = process.env.PORT || 2000;
+
+// Config the webhook for heroku
+bot.telegrambot.setWebhook(`${URL}bot${BOT_TOKEN}`);
+bot.startWebhook(`/bot${BOT_TOKEN}`, null, PORT);
 
 
-var telegramBot = require('node-telegram-bot-api');
-var token ='980805135:AAEWOjsDBR7BX8S99TNnAHg34z9YThCarNY';
-var api = new telegramBot(token, {polling: true});
-const options = {polling: true};
-const telegramBot1 = require('node-telegram-bot-api');
+const token ='980805135:AAEWOjsDBR7BX8S99TNnAHg34z9YThCarNY';
+const api = new telegramBot(token, {webhook: true});
+const options = {webhook: true};
 
-const bot = new telegramBot1('980805135:AAEWOjsDBR7BX8S99TNnAHg34z9YThCarNY');
-
+/*const telegramBot1 = require('node-telegram-bot-api');
+const bot = new telegramBot1('980805135:AAEWOjsDBR7BX8S99TNnAHg34z9YThCarNY');*/
 
 
 
-api.onText(/\/Help/, function(msg, match) {
+bot.onText(/\/Help/, function(msg, match) {
 var fromId = msg.from.id;
-api.sendMessage(fromId, "I cant't help you. \n/Help\n/Start\n/Question ");
+bot.sendMessage(fromId, "I cant't help you. \n/Help\n/Start\n/Question ");
 });
 
 
@@ -27,7 +35,7 @@ api.sendMessage(fromId, "They call me TestBot. " +
 
 
 // Matches /Question
-api.onText(/\/Question/, function Question(msg) {
+bot.onText(/\/Question/, function Question(msg) {
   const opts = {
     reply_to_message_id: msg.message_id,
     reply_markup: JSON.stringify({
@@ -37,11 +45,11 @@ api.onText(/\/Question/, function Question(msg) {
       ]
     })
   };
-  api.sendMessage(msg.chat.id, 'Do you like this?', opts);
+  bot.sendMessage(msg.chat.id, 'Do you like this?', opts);
 });
 
 
-api.onText(/Yes/, function yes(msg) {
+bot.onText(/Yes/, function yes(msg) {
   const why = {
     reply_to_message_id: msg.message_id,
     reply_markup: JSON.stringify({
@@ -51,11 +59,11 @@ api.onText(/Yes/, function yes(msg) {
       ] 
     })
   };	
-  api.sendMessage(msg.chat.id, 'Why?', why);
+  bot.sendMessage(msg.chat.id, 'Why?', why);
 });
 
 
-api.onText(/No/, function no(msg) {
+bot.onText(/No/, function no(msg) {
   const why1 = {
     reply_to_message_id: msg.message_id,
     reply_markup: JSON.stringify({
@@ -66,7 +74,7 @@ api.onText(/No/, function no(msg) {
 
     })
   };
-  api.sendMessage(msg.chat.id, 'Why?', why1);
+  bot.sendMessage(msg.chat.id, 'Why?', why1);
 });
 
 
@@ -80,7 +88,7 @@ api.onText(/No/, function no(msg) {
     return bot.sendMessage(msg.from.id, 'Keyboard example.', {replyMarkup});
 
 });*/
-api.onText(/\/Start/ , function no(msg) {
+bot.onText(/\/Start/ , function no(msg) {
   const start = {
     reply_to_message_id: msg.message_id,
     reply_markup: JSON.stringify({
@@ -91,10 +99,10 @@ api.onText(/\/Start/ , function no(msg) {
 
     })
   };
-  api.sendMessage(msg.chat.id, 'Menu', start);
+  bot.sendMessage(msg.chat.id, 'Menu', start);
 });
 
-api.onText(/Easy/ , function no(msg) {
+bot.onText(/Easy/ , function no(msg) {
   const start = {
     reply_to_message_id: msg.message_id,
     reply_markup: JSON.stringify({
@@ -105,10 +113,10 @@ api.onText(/Easy/ , function no(msg) {
 
     })
   };
-  api.sendMessage(msg.chat.id, 'Menu', start);
+  bot.sendMessage(msg.chat.id, 'Menu', start);
 });
 
-api.onText(/Troublesome/ , function no(msg) {
+bot.onText(/Troublesome/ , function no(msg) {
   const start = {
     reply_to_message_id: msg.message_id,
     reply_markup: JSON.stringify({
@@ -119,11 +127,11 @@ api.onText(/Troublesome/ , function no(msg) {
 
     })
   };
-  api.sendMessage(msg.chat.id, 'Menu', start);
+  bot.sendMessage(msg.chat.id, 'Menu', start);
 });
 
 
-api.onText(/\/Hide/ , function ni(msg) {
+bot.onText(/\/Hide/ , function ni(msg) {
   const hide = {
     reply_to_message_id: msg.message_id,
     reply_markup: JSON.stringify({
@@ -135,7 +143,7 @@ api.onText(/\/Hide/ , function ni(msg) {
 
     })
   };
-  api.sendMessage(msg.chat.id, 'Hide', hide);
+  bot.sendMessage(msg.chat.id, 'Hide', hide);
 });
 
 /*chat_id: 11764944,
